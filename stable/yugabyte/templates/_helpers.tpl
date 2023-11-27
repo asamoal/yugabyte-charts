@@ -62,9 +62,7 @@ Create secrets in DBNamespace from other namespaces by iterating over envSecrets
 {{- define "yugabyte.envsecrets" -}}
 {{- range $v := .secretenv }}
 {{- if $v.valueFrom.secretKeyRef.namespace }}
-{{- $secretObj := (lookup
-"v1"
-"Secret"
+{{- $secretObj := (lookup "v1" "Secret"
 $v.valueFrom.secretKeyRef.namespace
 $v.valueFrom.secretKeyRef.name)
 | default dict }}
